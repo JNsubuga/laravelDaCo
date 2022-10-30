@@ -70,9 +70,9 @@ class MembersController extends Controller
         $toDetailMembersAccounts = Member::where('members.id', $id)
             ->leftJoin('transactions', 'members.id', '=', 'transactions.member_id')
             ->join('accounts', 'accounts.id', '=', 'transactions.account_id')
-            ->selectRaw('accounts.id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id as member_id, members.Names as member, members.Code as member_Code, SUM(transactions.Dr) as totalAmountPaid')
+            ->selectRaw('accounts.id as account_id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id, members.Names as member, members.Code as member_Code, SUM(transactions.Dr) as totalAmountPaid')
             ->groupBy(['accounts.id', 'accounts.Name', 'members.id'])
-            ->orderBy('member_id', 'ASC')
+            ->orderBy('account_id', 'ASC')
             ->get();
         return view('members.member_accounts', ['toDetailMembersAccounts' => $toDetailMembersAccounts]);
     }
