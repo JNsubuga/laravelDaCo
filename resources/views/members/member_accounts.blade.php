@@ -1,15 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Account Details') }}
+            {{ __('Member Details') }}
             <a href="{{ route('member.index') }}" class="bg-blue-500 text-white rounded-md py-1 px-2 my-4 hover:bg-blue-400 hover:text-blue-700 hover:border-blue-200 hover:border-4">
-                &lArr; Accounts List
+                &lArr; Members List
             </a>
         </h2>
     </x-slot>
     <div class="p-2 bg-slate-100 sm:rounded-lg m-1 w-full mx-1 shadow-sm">
         <div>
-            <h1 class="font-bold uppercase text-green-700">{{ 'Member: '.$toDetailMembersAccounts[0]->member }}</h1>
+            @if (empty($toDetailMembersAccounts[0]->member))
+            <h1 class="text-red-500 capitalize">No member name Record found in the database!!!</h1>
+            @else
+                <h1 class="font-bold uppercase text-green-700">
+                    {{ 'Member: '. $toDetailMembersAccounts[0]->member }}
+                </h1>
+            @endif
             <table class="table-auto w-full mt-2">
                     <tr class="border-b-4 border-gray-400 font-bold capitalize">
                     <th class="py-1 px-6 text-left">Account</th>
@@ -37,7 +43,7 @@
                             <td class="py-0 px-6 text-right">{{ number_format($account->AnualPrinciple - $account->totalAmountPaid, 2, '.', ',') }}</td>
                         </tr>
                     @empty
-                        <tr><td colspan="5" class="text-red-500">No transaction record found in the database!!!</td></tr>
+                        <tr><td colspan="5" class="text-red-500 capitalize">No transaction record found in the database!!!</td></tr>
                     @endforelse
                     <tr>
                         <td class="py-0 px-6" colspan="2">Total</td>

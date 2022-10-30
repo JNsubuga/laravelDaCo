@@ -17,12 +17,15 @@
         <div class="rounded-lg p-4 bg-transparent w-full mt-8 grid grid-cols-5 space-x-2 space-y-2">
             @forelse ($members as $member)
                 <div class="rounded-xl border border-green-600 p-2 shadow-lg">
-                    <h1 class="w-full border-b-2 border-gray-500 font-bold capitalize">
-                        <a href="{{ route('member.show', $member->id) }}">{{ $member->Names }}</a>
-                    </h1>
-                    <h1 class="w-full border-b-2 border-gray-500 font-bold capitalize">
-                        <a href="{{ route('member.memberAccounts', $member->id) }}">Acounts</a>
-                    </h1>
+                    <div class="flex">
+                        <h1 class="w-3/4 border-b-2 border-gray-500 font-bold capitalize">
+                            <a href="{{ route('member.show', $member->id) }}">{{ $member->Names }}</a>
+                        </h1>
+                        <span class="w-1/4 border-b-2 border-gray-500 font-bold capitalize text-blue-500 bg-slate-300 m-px rounded text-center px-2">
+                            <a href="{{ route('member.memberAccounts', $member->id) }}">Acounts</a>
+                        </span>
+                    </div>
+                    
                     <div class="mt-4">
                         <div class="flex relative">
                             <p class="absolute left-0">Member's Code:</p> <p class="absolute right-0 text-green-700 font-extrabold">{{ $member->Code }}</p>

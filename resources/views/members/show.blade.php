@@ -1,4 +1,12 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Member Details') }}
+            <a href="{{ route('member.index') }}" class="bg-blue-500 text-white rounded-md py-1 px-2 my-4 hover:bg-blue-400 hover:text-blue-700 hover:border-blue-200 hover:border-4">
+                &lArr; Members List
+            </a>
+        </h2>
+    </x-slot>
     <div class="p-4 m-1 w-full">
         <div class="relative w-full">
             <div class="uppercase font-extrabold text-green-700 text-xl absolute left-0">
