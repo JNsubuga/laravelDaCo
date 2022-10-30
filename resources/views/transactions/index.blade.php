@@ -15,6 +15,7 @@
         </div>
         <table class="table-auto w-full mt-6">
             <tr class="border-b-4 border-gray-400 font-bold capitalize">
+                <th class="py-1 px-6 text-left">S/No.</th>
                 <th class="py-1 px-6 text-left">Date</th>
                 <th class="py-1 px-6 text-left">Folio</th>
                 {{-- <th class="py-1 px-6 text-left">Event</th> --}}
@@ -24,9 +25,16 @@
                  <th class="py-1 px-6 text-right">Balance After</th> --}}
                 <th class="py-1 px-6">Action</th>
             </tr>
+            @php
+                $sNo = 0;
+            @endphp
             @forelse ($transactions as $transaction)
+            @php
+                $sNo = ++$sNo;
+            @endphp
             <tr class="border-b-2 border-gray-300">
-                <td class="py-0 px-6">{{ ($transaction->txnDate) }}</td>
+                <td class="py-0 px-6">{{ $sNo }}</td>
+                <td class="py-0 px-6">{{ $transaction->txnDate }}</td>
                 <td class="py-0 px-6 text-left">{{ 'F'.$transaction->account->year.'-'.$transaction->member->Code.'-'.$transaction->account->Code }}</td>
                 {{-- <td class="py-0 px-6 text-left">{{ $transaction->event->Event }}</td> --}}
                 <td class="py-0 px-6 text-right">{{ number_format($transaction->Dr, 2, '.', ',') }}</td>

@@ -20,6 +20,9 @@
                     <h1 class="w-full border-b-2 border-gray-500 font-bold capitalize">
                         <a href="{{ route('member.show', $member->id) }}">{{ $member->Names }}</a>
                     </h1>
+                    <h1 class="w-full border-b-2 border-gray-500 font-bold capitalize">
+                        <a href="{{ route('member.memberAccounts', $member->id) }}">Acounts</a>
+                    </h1>
                     <div class="mt-4">
                         <div class="flex relative">
                             <p class="absolute left-0">Member's Code:</p> <p class="absolute right-0 text-green-700 font-extrabold">{{ $member->Code }}</p>

@@ -18,9 +18,7 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::orderBy('txnDate', 'asc')->filter(request(['search']))->paginate();
-        // $transactions = Transaction::orderBy(['member_id', 'account_id'])->groupBy(['member_id', 'account_id'])->sum('Dr');
-        // dd($transactions);
+        $transactions = Transaction::orderBy('txnDate', 'asc')->filter(request(['search']))->paginate('50');
         return view('transactions.index', ['transactions' => $transactions]);
     }
 
