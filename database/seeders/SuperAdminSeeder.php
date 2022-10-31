@@ -22,7 +22,7 @@ class SuperAdminSeeder extends Seeder
             'email' => 'jkiwanjago@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('020069Nkj')
-        ]);
-        // ->assignRole('SuperAdmin');
+        ])
+            ->assignRole('SuperAdmin');
     }
 }

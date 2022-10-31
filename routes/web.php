@@ -25,6 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/superadmin', function () {
+    return view('superadmins.index');
+})->middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.index');
+
 require __DIR__ . '/auth.php';
 
 Route::prefix('/members')->group(function () {

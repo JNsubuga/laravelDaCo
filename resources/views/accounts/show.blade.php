@@ -9,7 +9,13 @@
     </x-slot>
     <div class="p-2 bg-slate-100 sm:rounded-lg m-1 w-full mx-1 shadow-sm">
         <div>
-            <h1 class="font-bold uppercase text-green-700">{{ 'Year '.$toDetail[0]->year.': '.$toDetail[0]->Name }}</h1>
+            @if (empty($toDetail[0]->member))
+            <h1 class="text-red-500 capitalize">No account name Record found in the database!!!</h1>
+            @else
+                <h1 class="font-bold uppercase text-green-700">
+                    {{ 'Year '.$toDetail[0]->year.': '.$toDetail[0]->Name }}
+                </h1>
+            @endif
             <table class="table-auto w-full mt-2">
                     <tr class="border-b-4 border-gray-400 font-bold capitalize">
                     <th class="py-1 px-6 text-left">Member</th>
@@ -31,7 +37,7 @@
                     @endphp
                         <tr class="border-b-2 border-gray-300">
                             <td class="py-0 px-6 text-left">{{ $member->member }}</td>
-                            <td class="py-0 px-6 text-left">{{ 'F'.$member->year.'-'.$member->Code.'-'.$member->member_Code }}</td>
+                            <td class="py-0 px-6 text-left">{{ 'F'.$member->year.'-'.$member->member_Code.'-'.$member->Code }}</td>
                             <td class="py-0 px-6 text-right">{{ number_format($member->AnualPrinciple, 2, '.', ',') }}</td>
                             <td class="py-0 px-6 text-right">{{ number_format($member->totalAmountPaid, 2, '.', ',') }}</td>
                             <td class="py-0 px-6 text-right">{{ number_format($member->AnualPrinciple - $member->totalAmountPaid, 2, '.', ',') }}</td>
