@@ -3,6 +3,9 @@
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\MemberaccountsController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\SuperAdmin\IndexController;
+use App\Http\Controllers\SuperAdmin\PermissionsController;
+use App\Http\Controllers\SuperAdmin\RolesController;
 use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +28,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/superadmin', function () {
-    return view('superadmins.index');
-})->middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.index');
+// Route::get('/superadmin', function () {
+//     return view('superadmins.index');
+// })->middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.index');
+
+Route::middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.')->prefix('superadmin')->group(function () {
+    Route::get('/', [IndexController::class, 'index'])->name('index');
+    Route::resource('/roles', RolesController::class);
+    Route::resource('/permissions', PermissionsController::class);
+});
 
 require __DIR__ . '/auth.php';
 
