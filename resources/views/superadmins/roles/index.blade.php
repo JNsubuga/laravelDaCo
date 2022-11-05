@@ -16,7 +16,7 @@
         <table class="table-auto w-full mt-6">
             <tr class="border-b-4 border-gray-400 font-bold capitalize">
                 <th class="py-1 px-6 text-left">Name</th>
-                <th class="py-1 px-6">Action</th>
+                <th class="py-1 px-6 text-right">Action</th>
             </tr>
             @forelse ($roles as $role)
             <tr class="border-b-2 border-gray-300">
@@ -25,11 +25,12 @@
                         {{ ($role->name) }}
                     </a>
                 </td>
-                <td class="py-0 grid grid-cols-2">
-                    <a href="{{ route('superadmin.roles.edit', $role->id) }}" class="text-blue-500 bg-slate-300 m-px rounded text-center font-bold">
+                {{-- <td class="py-0 grid grid-cols-2"> --}}
+                <td class="py-0 flex justify-end space-x-1">
+                    <a href="{{ route('superadmin.roles.edit', $role->id) }}" class="text-blue-500 bg-slate-300 m-px px-2 rounded text-center font-bold">
                         Edit
                     </a>
-                    <form class="bg-red-600 px-0 m-px text-center rounded" action="{{route('superadmin.roles.destroy', $role->id)}}" method="post" onsubmit="return confirm('Are you sure! You need to Delete this Record?!')">
+                    <form class="bg-red-600 px-2 m-px text-center rounded" action="{{route('superadmin.roles.destroy', $role->id)}}" method="post" onsubmit="return confirm('Are you sure! You need to Delete this Record?!')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-white italic font-bold">Delete</button>
