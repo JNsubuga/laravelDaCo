@@ -32,6 +32,8 @@ class RolesController extends Controller
 
     public function show($id)
     {
+        $toPermite = Role::where('id', $id)->first();
+        return view('superadmins.roles.show');
     }
 
     public function edit($id)
