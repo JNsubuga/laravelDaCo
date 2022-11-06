@@ -34,8 +34,14 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.')->prefix('superadmin')->group(function () {
     Route::get('/', [IndexController::class, 'index'])->name('index');
+
     Route::resource('/roles', RolesController::class);
+    Route::post('/roles/{roleId}/permissions', [RolesController::class, 'grantPermission'])->where('roleId', '[0-9]+')->name('roles.grantPermission');
+    Route::delete('/roles/{roelId}/permissions/{permissionId}', [RolesController::class, 'revokePermission'])->where(['roleId', '[0-9]+'], ['permissionId', '[0-9]+'])->name('roles.revokePermission');
+
     Route::resource('/permissions', PermissionsController::class);
+    Route::post('/permissions/{permissionId}/roles', [PermissionsController::class, 'assignRole'])->where('roleId', '[0-9]+')->name('permissions.assignRole');
+    Route::delete('/permissions/{permissionId}/roles/{roelId}', [PermissionsController::class, 'removeRole'])->where(['permissionId', '[0-9]+'], ['roleId', '[0-9]+'])->name('permissions.removePermission');
 });
 
 require __DIR__ . '/auth.php';
