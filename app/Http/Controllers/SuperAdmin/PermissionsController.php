@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionsController extends Controller
 {
@@ -32,6 +33,28 @@ class PermissionsController extends Controller
 
     public function show($id)
     {
+        $toDetail = Permission::where('id', $id)->first();
+        $roles = Role::all();
+        return view('superadmins.permissions.show', ['toDetail' => $toDetail, 'roles' => $roles]);
+    }
+
+    public function assignRole(Request $request, $permissionId)
+    {
+        $permission = Permission::where('id', $permissionId)->first();
+        if ($permission->hasRole($request->role)) {
+            return back()->with('error', 'Role already assigned to this Permission!!!');
+        }
+        $permission->assignRole($request->role);
+        return back()->with('success', 'Role assigned to this permission successfully!!');
+    }
+
+    public function removeRole($permissionId, $roleId)
+    {
+        $permission = Permission::where('id', $permissionId)->first();
+        $role = Role::where('id', $roleId)->first();
+        if ($permission->hasRole($role)) {
+            $permission->assignRemove($role);
+        }
     }
 
     public function edit($id)
