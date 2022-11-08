@@ -37,6 +37,9 @@
                     <x-nav-link :href="route('superadmin.index')" :active="request()->routeIs('superadmin.index')" class="mx-2">
                         {{ __('superAdmin') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('superadmin.users.index')" :active="request()->routeIs('superadmin.users.index')" class="mx-2">
+                        {{ __('Users') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('superadmin.roles.index')" :active="request()->routeIs('superadmin.roles.index')" class="mx-2">
                         {{ __('Roles') }}
                     </x-nav-link>

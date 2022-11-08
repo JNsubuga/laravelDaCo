@@ -53,8 +53,10 @@ class PermissionsController extends Controller
         $permission = Permission::where('id', $permissionId)->first();
         $role = Role::where('id', $roleId)->first();
         if ($permission->hasRole($role)) {
-            $permission->assignRemove($role);
+            $permission->removeRole($role);
+            return back()->with('success', 'Role removed successfully!!');
         }
+        return back()->with('error', 'Role not yet Assigned to this Permissoin!!!');
     }
 
     public function edit($id)

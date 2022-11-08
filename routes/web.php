@@ -6,6 +6,7 @@ use App\Http\Controllers\MembersController;
 use App\Http\Controllers\SuperAdmin\IndexController;
 use App\Http\Controllers\SuperAdmin\PermissionsController;
 use App\Http\Controllers\SuperAdmin\RolesController;
+use App\Http\Controllers\SuperAdmin\UsersController;
 use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,11 +38,27 @@ Route::middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.')-
 
     Route::resource('/roles', RolesController::class);
     Route::post('/roles/{roleId}/permissions', [RolesController::class, 'grantPermission'])->where('roleId', '[0-9]+')->name('roles.grantPermission');
-    Route::delete('/roles/{roelId}/permissions/{permissionId}', [RolesController::class, 'revokePermission'])->where(['roleId', '[0-9]+'], ['permissionId', '[0-9]+'])->name('roles.revokePermission');
+    Route::delete('/roles/{roleId}/permissions/{permissionId}', [RolesController::class, 'revokePermission'])->where(['roleId', '[0-9]+'], ['permissionId', '[0-9]+'])->name('roles.revokePermission');
 
     Route::resource('/permissions', PermissionsController::class);
-    Route::post('/permissions/{permissionId}/roles', [PermissionsController::class, 'assignRole'])->where('roleId', '[0-9]+')->name('permissions.assignRole');
-    Route::delete('/permissions/{permissionId}/roles/{roelId}', [PermissionsController::class, 'removeRole'])->where(['permissionId', '[0-9]+'], ['roleId', '[0-9]+'])->name('permissions.removeRole');
+    Route::post('/permissions/{permissionId}/roles', [PermissionsController::class, 'assignRole'])->where('permissionId', '[0-9]+')->name('permissions.assignRole');
+    Route::delete('/permissions/{permissionId}/roles/{roleId}', [PermissionsController::class, 'removeRole'])->where(['permissionId', '[0-9]+'], ['roleId', '[0-9]+'])->name('permissions.removeRole');
+
+    /**Users Roles & Permissions */
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/users/{id}', [UsersController::class, 'show'])->where('id', '[0-9]+')->name('users.show');
+
+    Route::post('/users/{userId}/roles', [UsersController::class, 'assignRole'])->where('userId', '[0-9]+')->name('users.assignRole');
+    Route::delete('/users/{userId}/roles/{rolrId}', [UsersController::class, 'removeRole'])->where(['userId', '[0-9]+'], ['roleId', '[0-9]+'])->name('users.removeRole');
+
+    Route::post('/users/{userId}/permissions', [UsersController::class, 'grantPermission'])->where('userId', '[0-9]+')->name('users.grantPermission');
+    Route::delete('/users/{userId}/permissions/{permissionId}', [UsersController::class, 'revokePermission'])->where(['roleId', '[0-9]+'], ['permissionId', '[0-9]+'])->name('users.revokePermission');
+
+    // Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+    // Route::post('/users', [UsersController::class, 'store'])->name('users.store');
+    // Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->where('id', '[0-9]+')->name('users.edit');
+    // Route::put('/users/{id}', [UsersController::class, 'update'])->where('id', '[0-9]+')->name('users.update');
+    Route::delete('/users/{id}', [UsersController::class, 'destroy'])->where('id', '[0-9]+')->name('users.destroy');
 });
 
 require __DIR__ . '/auth.php';
