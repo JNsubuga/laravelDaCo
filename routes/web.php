@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified', 'role:SuperAdmin'])->name('superadmin.')-
     Route::get('/users/{id}', [UsersController::class, 'show'])->where('id', '[0-9]+')->name('users.show');
 
     Route::post('/users/{userId}/roles', [UsersController::class, 'assignRole'])->where('userId', '[0-9]+')->name('users.assignRole');
-    Route::delete('/users/{userId}/roles/{rolrId}', [UsersController::class, 'removeRole'])->where(['userId', '[0-9]+'], ['roleId', '[0-9]+'])->name('users.removeRole');
+    Route::delete('/users/{userId}/roles/{roleId}', [UsersController::class, 'removeRole'])->where(['userId', '[0-9]+'], ['roleId', '[0-9]+'])->name('users.removeRole');
 
     Route::post('/users/{userId}/permissions', [UsersController::class, 'grantPermission'])->where('userId', '[0-9]+')->name('users.grantPermission');
     Route::delete('/users/{userId}/permissions/{permissionId}', [UsersController::class, 'revokePermission'])->where(['roleId', '[0-9]+'], ['permissionId', '[0-9]+'])->name('users.revokePermission');

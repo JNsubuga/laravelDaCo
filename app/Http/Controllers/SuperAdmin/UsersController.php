@@ -59,35 +59,33 @@ class UsersController extends Controller
 
     public function grantPermission(Request $request, $id)
     {
-        $role = Role::where('id', $id)->first();
-        if ($role->hasPermissionTo($request->permission)) {
-            return back()->with('error', 'Permission already granted to this role!!!');
+        $user = User::where('id', $id)->first();
+        if ($user->hasPermissionTo($request->permission)) {
+            return back()->with('error', 'Permission already granted to this User!!!');
         }
-        $role->givePermissionTo($request->permission);
-        return back()->with('success', 'Permission granted to this Role!!');
+        $user->givePermissionTo($request->permission);
+        return back()->with('success', 'Permission granted to this user!!');
     }
 
-    public function revokePermission($roleId, $permissionId)
+    public function revokePermission($userId, $permissionId)
     {
-        $role = Role::where('id', $roleId)->first();
+        $user = User::where('id', $userId)->first();
         $permission = Permission::where('id', $permissionId)->first();
 
-        if ($role->hasPermissionTo($permission)) {
-            $role->revokePermissionTo($permission);
-            return back()->with('success', 'Permission revoked from this role!!');
+        if ($user->hasPermissionTo($permission)) {
+            $user->revokePermissionTo($permission);
+            return back()->with('success', 'Permission revoked from this user!!');
         }
-        return back()->with('error', 'Permission not yet granted to this role!!!');
+        return back()->with('error', 'Permission not yet granted to this user!!!');
     }
 
-    public function edit()
+    public function destroy($id)
     {
-    }
-
-    public function update()
-    {
-    }
-
-    public function destroy()
-    {
+        $user = User::where('id', $id)->first();
+        if ($user->hasRole('SuperAdmin')) {
+            return back()->with('error', 'This user can not be deleted!!!');
+        }
+        User::destroy($id);
+        return back()->with('success', 'User Deleted usccessfully!!');
     }
 }
