@@ -11,7 +11,8 @@ class RolesController extends Controller
 {
     public function index()
     {
-        $roles = Role::whereNotIn('name', ['SuperAdmin'])->get();
+        // $roles = Role::whereNotIn('name', ['SuperAdmin'])->get();
+        $roles = Role::get();
         return view('superadmins.roles.index', ['roles' => $roles]);
     }
 

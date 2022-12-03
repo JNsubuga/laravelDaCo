@@ -11,16 +11,14 @@
         <div class="overflow-hidden shadow-sm sm:rounded-lg p-2">
             <div class="mt-6 p-2">
                 <h2 class="text-2xl font-semibold">Role Permissions</h2>
-                <div>
+                <div class="grid grid-cols-4 gap-1">
                     @if ($toDetail->permissions)
                         @foreach ($toDetail->permissions as $permission)
-                            <div class="grid grid-cols-4">
-                                <form class="bg-red-600 px-2 m-px text-center rounded" action="{{route('superadmin.roles.revokePermission', [$toDetail->id, $permission->id])}}" method="post" onsubmit="return confirm('Are you sure! You need to Delete this Record?!')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-white italic font-bold">{{ $permission->name }}</button>
-                                </form>
-                            </div>
+                            <form class="bg-red-600 text-center rounded" action="{{route('superadmin.roles.revokePermission', [$toDetail->id, $permission->id])}}" method="post" onsubmit="return confirm('Are you sure! You need to Delete this Record?!')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-white italic font-bold">{{ $permission->name }}</button>
+                            </form>
                         @endforeach
                     @endif
                 </div>

@@ -14,7 +14,7 @@ class Transaction extends Model
     public function scopeFilter($query, array $filters)
     {
         if ($filters['search'] ?? false) {
-            $query->where('txnDate', 'like', '%' . request('search') . '%');
+            $query->where('txnDate', 'like', '%' . request('search') . '%')->orWhere();
         }
     }
 

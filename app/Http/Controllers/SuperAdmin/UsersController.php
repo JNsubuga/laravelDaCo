@@ -16,14 +16,6 @@ class UsersController extends Controller
         return view('superadmins.users.index', ['users' => $users]);
     }
 
-    public function create()
-    {
-    }
-
-    public function store()
-    {
-    }
-
     public function show($id)
     {
         $user = User::where('id', $id)->first();
