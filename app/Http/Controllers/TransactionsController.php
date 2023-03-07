@@ -90,13 +90,10 @@ class TransactionsController extends Controller
                     'currentBalance' => $balanceAfter
                 ]);
 
-
                 // dd($memberAccountIds);
 
                 // $selectedMember->accounts()->sync($memberAccountIds);
                 // $selectedMember->accounts()->attach($memberAccountIds);
-
-
 
                 return redirect(route('transaction.index'))->with('success', 'Transaction Recorded Successfully!!');
                 break;
