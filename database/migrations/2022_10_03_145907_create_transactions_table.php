@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('txnDate');
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
-            $table->foreignId('member_id')->constrained()->onDelete('cascade');
-            $table->foreignId('account_id')->constrained()->onDelete('cascade');
-            // $table->boolean('confirmed');
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
+            $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
+            $table->boolean('confirmed')->default(0);
             $table->double('Dr');
             $table->double('Cr');
             $table->double('balanceBefore');

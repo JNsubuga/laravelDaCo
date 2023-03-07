@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('memberaccounts', function (Blueprint $table) {
             $table->id();
             // $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('member_id')->constrained()->onDelete('cascade');
-            $table->foreignId('account_id')->constrained()->onDelete('cascade');
+            $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
+            $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
             $table->timestamps();
         });
     }
