@@ -27,7 +27,7 @@
             @endif
             <!-- Page Content -->
             <main class="flex w-full h-full">
-                <!-- Sidear content -->
+                <!-- Sidebar content -->
                 @include('layouts.sidebar')
                 {{ $slot }}
             </main>
