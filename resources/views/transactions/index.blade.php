@@ -27,6 +27,7 @@
             </tr>
             @php
                 $sNo = 0;
+                // dd($transactions);
             @endphp
             @forelse ($transactions as $transaction)
             @php
