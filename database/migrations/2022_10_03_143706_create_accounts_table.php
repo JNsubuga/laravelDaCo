@@ -19,7 +19,7 @@ return new class extends Migration
             $table->year('year');
             $table->string('Name');
             $table->string('Code');
-            $table->float('AnualPrinciple');
+            $table->double('AnualPrinciple', 12, 2);
             $table->timestamps();
         });
     }

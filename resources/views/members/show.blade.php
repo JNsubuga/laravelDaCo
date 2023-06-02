@@ -46,7 +46,7 @@
             </tr>
             @forelse ($toDetail->transactions as $transaction)
                 <tr class="border-b-2 border-gray-300">
-                    <td class="py-0 px-6">{{ ($transaction->txnDate) }}</td>
+                    <td class="py-0 px-6">{{ date('d/m/Y', strtotime($transaction->txnDate)) }}</td>
                     <td class="py-0 px-6">{{ ($transaction->account->Name) }}</td>
                     <td class="py-0 px-6 text-left">{{ 'F'.$transaction->account->year.'-'.$transaction->member->Code.'-'.$transaction->account->Code }}</td>
                     <td class="py-0 px-6 text-right">{{ number_format($transaction->Cr, 2, '.', ',') }}</td>

@@ -36,42 +36,30 @@ class AccountSeeder extends Seeder
             // ],
 
             [
-                'year' => 2021,
+                'year' => 2023,
                 'Name' => 'Membership Account',
                 'Code' => 'MS',
                 'AnualPrinciple' => 180000
             ],
             [
-                'year' => 2021,
+                'year' => 2023,
                 'Name' => 'Welfare Account',
                 'Code' => 'WS',
                 'AnualPrinciple' => 200000
             ],
             [
-                'year' => 2021,
+                'year' => 2023,
                 'Name' => 'Party Account',
                 'Code' => 'PS',
                 'AnualPrinciple' => 60000
             ],
 
-            [
-                'year' => 2022,
-                'Name' => 'Membership Account',
-                'Code' => 'MS',
-                'AnualPrinciple' => 180000
-            ],
-            [
-                'year' => 2022,
-                'Name' => 'Welfare Account',
-                'Code' => 'WS',
-                'AnualPrinciple' => 200000
-            ],
-            [
-                'year' => 2022,
-                'Name' => 'Party Account',
-                'Code' => 'PS',
-                'AnualPrinciple' => 60000
-            ],
+            // [
+            //     'year' => 2023,
+            //     'Name' => 'Project Fund 03',
+            //     'Code' => 'P03',
+            //     'AnualPrinciple' => 1030000
+            // ]
         ];
 
         foreach ($accounts as $account) {

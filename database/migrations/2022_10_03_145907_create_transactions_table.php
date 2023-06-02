@@ -21,9 +21,9 @@ return new class extends Migration
             $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
             $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
             $table->boolean('confirmed')->default(0);
-            $table->double('Dr');
-            $table->double('Cr');
-            $table->double('balanceBefore');
+            $table->double('Dr', 12, 2);
+            $table->double('Cr', 12, 2);
+            $table->double('balanceBefore', 12, 2);
             // $table->double('balanceAfter');
             $table->timestamps();
         });
