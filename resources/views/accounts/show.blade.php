@@ -36,7 +36,11 @@
                         $totalBalance = $totalPrinciple - $totalAmountPaid;
                     @endphp
                         <tr class="border-b-2 border-gray-300">
-                            <td class="py-0 px-6 text-left">{{ $member->member }}</td>
+                            <td class="py-0 px-6 text-left">
+                                <a href="{{ route('account.memberAccountDetails', ['account_id' => $member->account_id, 'member_id' => $member->member_id]) }}">
+                                    {{ ($member->member) }}
+                                </a>
+                            </td>
                             <td class="py-0 px-6 text-left">{{ 'F'.$member->year.'-'.$member->member_Code.'-'.$member->Code }}</td>
                             <td class="py-0 px-6 text-right">{{ number_format($member->AnualPrinciple, 2, '.', ',') }}</td>
                             <td class="py-0 px-6 text-right">{{ number_format($member->totalAmountPaid, 2, '.', ',') }}</td>

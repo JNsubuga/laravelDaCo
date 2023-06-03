@@ -60,12 +60,32 @@ class AccountsController extends Controller
         $toDetail = Account::where('accounts.id', $id)
             ->leftJoin('transactions', 'accounts.id', '=', 'transactions.account_id')
             ->join('members', 'members.id', '=', 'transactions.member_id')
-            ->selectRaw('accounts.id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id as member_id, members.Names as member, members.Code as member_Code, SUM(transactions.Dr) as totalAmountPaid')
+            ->selectRaw('accounts.id as account_id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id as member_id, members.Names as member, members.Code as member_Code, SUM(transactions.Dr) as totalAmountPaid')
             ->groupBy(['accounts.id', 'accounts.Name', 'members.id'])
             ->orderBy('member_id', 'ASC')
             ->get();
 
         return view('accounts.show', ['toDetail' => $toDetail]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function memberAccountDetails($id, $member_id)
+    {
+        $memberAccountToDetail = Account::where([['accounts.id', $id], ['members.id', $member_id]])
+            ->leftJoin('transactions', 'accounts.id', '=', 'transactions.account_id')
+            ->join('members', 'members.id', '=', 'transactions.member_id')
+            ->selectRaw('transactions.txnDate as transactionDate, accounts.id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id as member_id, members.Names as member, members.Code as member_Code, transactions.Dr')
+            // ->groupBy(['accounts.id', 'accounts.Name', 'members.id'])
+            ->orderBy('transactionDate', 'ASC')
+            // ->orderBy('member_id', 'ASC')
+            ->get();
+
+        return view('accounts.member_account_details', ['memberAccountToDetail' => $memberAccountToDetail]);
     }
 
     /**

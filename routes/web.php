@@ -81,6 +81,7 @@ Route::prefix('/accounts')->group(function () {
     Route::get('/create', [AccountsController::class, 'create'])->name('account.create');
     Route::post('/', [AccountsController::class, 'store'])->name('account.store');
     Route::get('/{id}', [AccountsController::class, 'show'])->name('account.show');
+    Route::get('/{account_id?}/{member_id?}', [AccountsController::class, 'memberAccountDetails'])->name('account.memberAccountDetails');
     Route::get('/{id}/edit', [AccountsController::class, 'edit'])->name('account.edit');
     Route::put('/{id}', [AccountsController::class, 'update'])->name('account.update');
     Route::delete('/{id}', [AccountsController::class, 'destroy'])->name('account.destroy');
