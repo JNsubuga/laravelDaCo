@@ -74,9 +74,12 @@ class AccountsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function memberAccountDetails($id, $member_id)
+    public function memberAccountDetails($account_id, $member_id)
     {
-        $memberAccountToDetail = Account::where([['accounts.id', $id], ['members.id', $member_id]])
+        $memberAccountToDetail = Account::where([
+            ['accounts.id', $account_id],
+            ['members.id', $member_id]
+        ])
             ->leftJoin('transactions', 'accounts.id', '=', 'transactions.account_id')
             ->join('members', 'members.id', '=', 'transactions.member_id')
             ->selectRaw('transactions.txnDate as transactionDate, accounts.id, accounts.Name, accounts.year, accounts.Code, accounts.AnualPrinciple, members.id as member_id, members.Names as member, members.Code as member_Code, transactions.Dr')
