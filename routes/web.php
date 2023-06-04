@@ -70,7 +70,7 @@ Route::prefix('/members')->group(function () {
     Route::post('/', [MembersController::class, 'store'])->name('member.store');
     Route::get('/{id}', [MembersController::class, 'show'])->where('id', '[0-9]+')->name('member.show');
     Route::get('/memberAccounts/{id}', [MembersController::class, 'memberAccounts'])->where('id', '[0-9]+')->name('member.memberAccounts');
-    Route::get('/{member_id?}/{account_id?}', [MembersController::class, 'memberAccountDetails'])/*->where([['member_id', '[0-9]+'], ['account_id', '[0-9]+']])*/->name('member.memberAccountDetails');
+    Route::get('/{member_id?}/{account_id?}', [MembersController::class, 'memberAccountDetails'])->where(['member_id' => '[0-9]+'], ['account_id' => '[0-9]+'])->name('member.memberAccountDetails');
     Route::get('/{id}/edit', [MembersController::class, 'edit'])->name('member.edit');
     Route::put('/{id}', [MembersController::class, 'update'])->name('member.update');
     Route::delete('/{id}', [MembersController::class, 'destroy'])->name('member.destroy');
@@ -82,7 +82,7 @@ Route::prefix('/accounts')->group(function () {
     Route::get('/create', [AccountsController::class, 'create'])->name('account.create');
     Route::post('/', [AccountsController::class, 'store'])->name('account.store');
     Route::get('/{id}', [AccountsController::class, 'show'])->where('id', '[0-9]+')->name('account.show');
-    Route::get('/{account_id?}/{member_id?}', [AccountsController::class, 'memberAccountDetails'])->name('account.memberAccountDetails');
+    Route::get('/{account_id?}/{member_id?}', [AccountsController::class, 'memberAccountDetails'])->where(['member_id' => '[0-9]+'], ['account_id' => '[0-9]+'])->name('account.memberAccountDetails');
     Route::get('/{id}/edit', [AccountsController::class, 'edit'])->where('id', '[0-9]+')->name('account.edit');
     Route::put('/{id}', [AccountsController::class, 'update'])->where('id', '[0-9]+')->name('account.update');
     Route::delete('/{id}', [AccountsController::class, 'destroy'])->where('id', '[0-9]+')->name('account.destroy');
